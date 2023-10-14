@@ -1,6 +1,6 @@
 # 📦 Data Visualization Project - NADIRE Nada
 
-A dashboard using streamlit application.
+My dashboard using streamlit application.
 
 ## Technical guidelines :
 
