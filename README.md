@@ -32,6 +32,6 @@ There will be also the questions that I'll be answering with my visualizations.
 
 The dataset that I created and will be using for the visualizations.
 
-## viz_project.csv : 
+### viz_project.csv : 
 Python file where all my visualizations will be stored.
 
