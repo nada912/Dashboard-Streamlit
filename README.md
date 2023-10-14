@@ -1,25 +1,37 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# 📦 Data Visualization Project - NADIRE Nada
 
 Description of the app ...
 
-## Demo App
+## Technical guidelines :
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+The streamlit application must respect the following technical requirements :
+- All the code must be organized in functions, if you can write comments, it is always better. Think modulable code, blocks of data processing, workflow steps. This will help you organize your code in modular functions
+- 4 internal streamlit plots : st.line, st.bar_chart, st.scatter_chart, st.map
+- 4 different external plots (histograms, Bar, Scatter or Pie charts) integrated with your application from external librairies like matplotlib, seaborn, plotly or Altair
+- 4 interactive elements (checkbox, slider ....)
+- Cache usage : cache for data loading and pre-processing
+- Optional : A decorator that logs in a file the time execution interval in seconds (30 seconds, 2 seconds, 0.01 seconds, ...) and the timestamp of the call ()
+- Optional : try to organize your functions calls into a main function in order to have a clear workflow of your application
 
-## GitHub Codespaces
+## My files : 
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/app-starter-kit?quickstart=1)
+I have four initial csv files that I'll be exploring for this project : 
+- caracteristiques-2022.csv
+- lieux-2022.csv
+- usagers-2022.csv
+- vehicules-2022.csv
 
-## Section Heading
+I will list below the files that I created during this project : 
 
-This is filler text, please replace this with text for this section.
+### clean-db.py : 
 
-## Further Reading
+Python file where I'll explore the dataset, do some cleaning and create the dataframe that I'll be using for my visualizations.
+There will be also the questions that I'll be answering with my visualizations.
 
-This is filler text, please replace this with a explanatory text about further relevant resources for this repo
-- Resource 1
-- Resource 2
-- Resource 3
+### accidents.csv : 
+
+The dataset that I created and will be using for the visualizations.
+
+## viz_project.csv : 
+Python file where all my visualizations will be stored.
+
