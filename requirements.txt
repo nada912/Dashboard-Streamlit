@@ -1,1 +1,6 @@
-streamlit>=1.26.0
+Streamlit version: 1.27.2
+NumPy version: 1.24.3
+Pandas version: 1.5.3
+Matplotlib version: 3.7.1
+Bokeh version: 2.4.3
+Plotly version: 5.17.0
