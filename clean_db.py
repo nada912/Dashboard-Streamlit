@@ -10,13 +10,12 @@ import plotly.figure_factory as ff
 # Data source : data.gouv.fr
 # Data chosen : Bases de données annuelles des accidents corporels de la circulation routière en 2022
 
-
 #--------------------------------------------------------Step 1 : Explore & Clean Data----------------------------------------------------------
-st.title("Data Exploring & Cleaning")
+# display title
+st.title ("Exploring and Cleaning Data")
 #--------------------------------------------------------usagers dataframe----------------------------------------------------------------------
-# display subtitle (level 2 heading)
+# display subtitle
 st.markdown("## Usagers Dataframe")
-
 usagers = pd.read_csv("usagers-2022.csv", delimiter=';', low_memory=False)
 
 # Check the dimensions of the DataFrame
@@ -95,6 +94,8 @@ st.write("Drop the missing values in column 'adr' :", caracteristiques)
 # Check summary statistics of numerical columns
 st.write("Summary statistics of numerical columns in 'caractéristiques' DataFrame:")
 st.write(caracteristiques.describe())
+
+
 #------------------------------------------------------------véhicules dataframe---------------------------------------------------------------
 # display subtitle
 st.markdown("## Véhicules Dataframe")
@@ -121,9 +122,10 @@ st.write("Drop the column 'occutc' :", vehicules)
 # Check summary statistics of numerical columns
 st.write("Summary statistics of numerical columns in 'véhicules' DataFrame:")
 st.write(vehicules.describe())
+
+
 #------------------------------------------------------------------Merge Dataframes------------------------------------------------------------
 # Merge the dataframes based on 'Num_Acc'
-
 main_df = usagers.merge(lieux, on='Num_Acc', how='inner')
 main_df = main_df.merge(caracteristiques, left_on='Num_Acc', right_on='Accident_Id', how='inner')
 main_df = main_df.merge(vehicules, on='Num_Acc', how='inner')
@@ -132,11 +134,12 @@ main_df = main_df.merge(vehicules, on='Num_Acc', how='inner')
 columns_to_keep = ['Num_Acc', 'mois', 'lum', 'com', 'agg', 'int', 'atm', 'catr', 'surf', 'catv', 'id_usager', 'catu', 'grav', 'sexe', 'an_nais', 'trajet']
 main_df = main_df[columns_to_keep]
 
+
 #------------------------------------------------------------------Download Df------------------------------------------------------------------
-
 # Save the main_df as a CSV file
-main_df.to_csv(r'c:\Users\HP\Downloads\DataViz_Project_NADIRE_Nada\DataViz-Project-master\accidents.csv', index=False)
+main_df.to_csv(r'C:\Users\HP\Downloads\DataViz_Project_NADIRE_Nada\DataViz-Project-master\accidents.csv', index=False)
 
+st.write("The merged dataframe main_df is saved as a CSV file named accidents.csv")
 # Create a download button
 st.download_button(
     label="Download main_df as CSV",
@@ -146,70 +149,39 @@ st.download_button(
     mime='text/csv',
 )
 
-#----------------------------------------------------------------------------------------------------------------------------------------------
-#--------------------------------------------------------------Step 2 : Data Visualization-----------------------------------------------------
 
-st.title("Data visualization")
-# standard informations
-
-accident_counts = usagers.groupby('Num_Acc').size().reset_index(name='accident_count')
-merged_df = main_df.merge(accident_counts, on='Num_Acc', how='left')
-st.write("Total accidents in 2022 per accident id : ", accident_counts)
-
-variance = merged_df['accident_count'].var()
-st.write("Variance of accidents : ", variance)
-
-sum_deaths = usagers['grav'].eq(2).sum()  # Gravité 2 corresponds to 'Tué'
-st.write("Sum of mortality : ", sum_deaths)
-
-variance_grav = usagers['grav'].var()
-st.write("Variance of 'grav' Column:", variance_grav)
-
-monthly_accident_counts = caracteristiques.groupby('mois').size().reset_index(name='accident_count')
-monthly_accident_counts = monthly_accident_counts.sort_values(by='mois')
-st.write("Number of accidents each month : ", monthly_accident_counts)
-
-total_accidents = len(usagers)
-percentage_deaths = (sum_deaths / total_accidents) * 100
-st.write("Percentage of Deaths among Accidents: ", percentage_deaths, "%")
-
-inside_agglomeration = len(caracteristiques[caracteristiques['agg'] == 2])
-outside_agglomeration = len(caracteristiques[caracteristiques['agg'] == 1])
-percentage_inside_agglomeration = (inside_agglomeration / total_accidents) * 100
-percentage_outside_agglomeration = (outside_agglomeration / total_accidents) * 100
-st.write(f"Inside Agglomeration: {percentage_inside_agglomeration:.2f}%")
-st.write(f"Outside Agglomeration: {percentage_outside_agglomeration:.2f}%")
-
+#-----------------------------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------Step 2 : Data Visualization------------------------------------------------------
 st.markdown("## Identifying the questions to be answered")
 
 st.markdown("#### A/ Determine the most accident-prone types of roads :")
-# use 'catr' in Lieux df
+# use 'catr' 
 st.write("1. Which types of roads have the highest accident rate ?")
-# use 'int' in Caractéristiques df
+# use 'int' 
 st.write("2. Are there specific road charcteristics associated with a higher likelihood of accidents ?")
 
 
 st.markdown("#### B/ Analyze road conditions and environmental factors :")
-#use 'surf' in Lieux df
+#use 'surf'
 st.write("1. How do road conditions (e.g., wet, icy, dry) correlate with accident occurrence and severity? ")
-# use 'atm' in Caractéristiques df
+# use 'atm' 
 st.write("2. Are certain weather conditions linked to an increased number of accidents ?")
 
 
 st.markdown("#### C/ Explore vehicle types and their impact on mortality :")
-# use 'catv' in Véhicules df
+# use 'catv' 
 st.write("Is there a correlation between the type of vehicle and the severity of accidents in terms of mortality? ")
 
 
 st.markdown("#### D/ Investigate age and gender of accident victims :")
-# use 'sexe' and 'an_nais' in Usagers df
+# use 'sexe' and 'an_nais' 
 st.write("How does the age distribution of accident victims vary by gender? ")
 
 st.markdown("#### E/ Geographic analysis :")
-# use 'com' in Caractéritiques df
+# use 'com' 
 st.write("Are there regions or areas that consistently experience higher accident rates? ")
 
 
 st.markdown("#### F/ Investigate Usages and trajectories :")
-# use 'trajet' in Usagers df
+# use 'trajet' 
 st.write("Do certain types of trips or trajectories have a higher likelihood of accidents? ")
