@@ -131,7 +131,7 @@ main_df = main_df.merge(caracteristiques, left_on='Num_Acc', right_on='Accident_
 main_df = main_df.merge(vehicules, on='Num_Acc', how='inner')
 
 # Select only the necessary columns from the merged dataframe
-columns_to_keep = ['Num_Acc', 'mois', 'lum', 'com', 'agg', 'int', 'atm', 'catr', 'surf', 'catv', 'id_usager', 'catu', 'grav', 'sexe', 'an_nais', 'trajet']
+columns_to_keep = ['Num_Acc', 'mois', 'lum', 'dep', 'agg', 'int', 'atm', 'catr', 'surf', 'catv', 'id_usager', 'catu', 'grav', 'sexe', 'an_nais', 'trajet']
 main_df = main_df[columns_to_keep]
 
 
@@ -155,33 +155,25 @@ st.download_button(
 st.markdown("## Identifying the questions to be answered")
 
 st.markdown("#### A/ Determine the most accident-prone types of roads :")
-# use 'catr' 
 st.write("1. Which types of roads have the highest accident rate ?")
-# use 'int' 
 st.write("2. Are there specific road charcteristics associated with a higher likelihood of accidents ?")
 
 
 st.markdown("#### B/ Analyze road conditions and environmental factors :")
-#use 'surf'
 st.write("1. How do road conditions (e.g., wet, icy, dry) correlate with accident occurrence and severity? ")
-# use 'atm' 
 st.write("2. Are certain weather conditions linked to an increased number of accidents ?")
 
 
 st.markdown("#### C/ Explore vehicle types and their impact on mortality :")
-# use 'catv' 
 st.write("Is there a correlation between the type of vehicle and the severity of accidents in terms of mortality? ")
 
 
 st.markdown("#### D/ Investigate age and gender of accident victims :")
-# use 'sexe' and 'an_nais' 
 st.write("How does the age distribution of accident victims vary by gender? ")
 
 st.markdown("#### E/ Geographic analysis :")
-# use 'com' 
 st.write("Are there regions or areas that consistently experience higher accident rates? ")
 
 
 st.markdown("#### F/ Investigate Usages and trajectories :")
-# use 'trajet' 
 st.write("Do certain types of trips or trajectories have a higher likelihood of accidents? ")
